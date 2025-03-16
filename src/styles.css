@@ -71,6 +71,10 @@ body {
   width: 34px;
 }
 
+.square.winning {
+  background: #c8e6c9;
+}
+
 .board-row:after {
   clear: both;
   content: '';
