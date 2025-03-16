@@ -83,9 +83,14 @@ function MovesList({ history, currentMove, onJumpTo }) {
 
   return (
     <>
-      <button onClick={() => setIsAscending(!isAscending)}>
-        {isAscending ? "Ascending" : "Descending"}
-      </button>
+      <label>
+        <input
+          type="checkbox"
+          checked={isAscending}
+          onChange={() => setIsAscending(!isAscending)}
+        />
+        Ascending
+      </label>
       <ul>{moves}</ul>
     </>
   );
