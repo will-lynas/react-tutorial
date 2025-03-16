@@ -30,30 +30,23 @@ function Board({ xIsNext, squares, onPlay }) {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
-  const board = [];
-  for (let i = 0; i < 3; i++) {
-    const row = [];
-    for (let j = 0; j < 3; j++) {
-      let index = i * 3 + j;
-      row.push(
-        <Square
-          key={index}
-          value={squares[index]}
-          onSquareClick={() => handleClick(index)}
-        />
-      );
-    }
-    board.push(
-      <div key={i} className="board-row">
-        {row}
-      </div>
-    );
-  }
-
   return (
     <>
       <div className="status">{status}</div>
-      {board}
+      {[0, 1, 2].map((i) => (
+        <div key={i} className="board-row">
+          {[0, 1, 2].map((j) => {
+            const index = i * 3 + j;
+            return (
+              <Square
+                key={index}
+                value={squares[index]}
+                onSquareClick={() => handleClick(index)}
+              />
+            );
+          })}
+        </div>
+      ))}
     </>
   );
 }
