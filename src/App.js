@@ -65,13 +65,19 @@ function MovesList({ history, currentMove, onJumpTo }) {
       if (move === 0) {
         return <li key={move}>You are at game start</li>;
       } else {
-        return <li key={move}>You are at move #{move}</li>;
+        const [row, col] = findMove(squares, history[move - 1]);
+        return (
+          <li key={move}>
+            You are at move #{move} ({row}, {col})
+          </li>
+        );
       }
     }
 
     let description;
     if (move > 0) {
-      description = "Go to move #" + move;
+      const [row, col] = findMove(squares, history[move - 1]);
+      description = `Go to move #${move} (${row}, ${col})`;
     } else {
       description = "Go to game start";
     }
@@ -152,4 +158,13 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+function findMove(currentSquares, previousSquares) {
+  const position = currentSquares.findIndex(
+    (square, i) => square !== previousSquares[i]
+  );
+  const row = Math.floor(position / 3);
+  const col = position % 3;
+  return [row, col];
 }
