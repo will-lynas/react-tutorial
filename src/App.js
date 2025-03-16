@@ -52,6 +52,8 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 
 function MovesList({ history, currentMove, onJumpTo }) {
+  const [isAscending, setIsAscending] = useState(false);
+
   const moves = history.map((squares, move) => {
     if (move === currentMove) {
       if (move === 0) {
@@ -75,7 +77,18 @@ function MovesList({ history, currentMove, onJumpTo }) {
     );
   });
 
-  return <ul>{moves}</ul>;
+  if (isAscending) {
+    moves.reverse();
+  }
+
+  return (
+    <>
+      <button onClick={() => setIsAscending(!isAscending)}>
+        {isAscending ? "Ascending" : "Descending"}
+      </button>
+      <ul>{moves}</ul>
+    </>
+  );
 }
 
 export default function Game() {
